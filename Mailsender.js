@@ -7,7 +7,7 @@ const { format } = require('date-fns');
 let smtpTransport = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'your-mail',
+        user: 'your-mail-of_new',
         pass: 'your-mail-appPassword'           //  email password
     }
 });

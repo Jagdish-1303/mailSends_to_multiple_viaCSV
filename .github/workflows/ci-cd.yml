@@ -1,0 +1,38 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master   # Trigger the pipeline on push to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '19.9.0'   # Adjust this to the Node.js version you're using
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test   # Ensure you have tests set up in your project
+
+  deploy:
+    if: success()
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to Heroku   # Replace Heroku with your deployment platform if different
+        run: |
+          heroku login
+          git push heroku main
